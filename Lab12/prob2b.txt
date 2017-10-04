@@ -1,0 +1,22 @@
+[eos11:~/Desktop/CIS452/Lab12]$ ls -l
+total 40
+-rw------- 1 paquett users  760 Apr 10 17:49 prob2b.txt
+-rw------- 1 paquett users  308 Apr  6 11:11 prob3c.txt
+-rwx--x--x 1 paquett users 8792 Apr  6 11:07 sample
+-rwx--x--x 1 paquett users 8800 Apr 10 17:50 sample2
+-rw------- 1 paquett users  527 Apr  6 11:07 sampleprogram1.c
+-rw------- 1 paquett users  424 Apr 10 17:50 sampleprogram2.c
+-rw------- 1 paquett users    0 Apr  6 11:00 test2.txt
+-rw------- 1 paquett users    0 Apr  6 11:00 test.c
+[eos11:~/Desktop/CIS452/Lab12]$ ./sample2
+sampleprogram2.c    	424 Bytes
+sampleprogram1.c    	527 Bytes
+sample              	8792 Bytes
+..                  	4096 Bytes
+.                   	4096 Bytes
+sample2             	8800 Bytes
+prob2b.txt          	760 Bytes
+prob3c.txt          	308 Bytes
+test.c              	0 Bytes
+test2.txt           	0 Bytes
+

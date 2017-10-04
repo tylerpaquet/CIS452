@@ -1,0 +1,8 @@
+[eos23:~/Desktop/CIS452/Lab12]$ ls
+sample  sampleprogram1.c  test2.txt  test.c  testdir  typescript
+[eos23:~/Desktop/CIS452/Lab12]$ ./sample sampleprogram1.c
+sampleprogram1.c is not a directory
+[eos23:~/Desktop/CIS452/Lab12]$ ./sample testdir
+testdir is a directory
+[eos23:~/Desktop/CIS452/Lab12]$ exit
+exit

@@ -1,0 +1,95 @@
+[arch05:~/Desktop/CIS452/Project2]$ gcc -Wall project2.c
+[arch05:~/Desktop/CIS452/Project2]$ ./a.out 8-input_B.dat 8-input_A.dat results.dat
+--------------------------------------------------------------------------------
+Hello, this program will take two binary numbers A, and B (from input files) and
+perform the operation A-B and store the results in a file. Press 'Ctrl-C' when
+you are ready to begin
+Waiting...^C
+(Adder) A-input: 01100100
+(Complementer) B-input: 00100100
+(Complementer) Bits are being flipped...
+(Complementer) Sending 11011011 to incrementer
+(Incrementer) Received 11011011 from complementer
+(Incrementer) Number is being are being incremented...
+(Incrementer) Sending 11011100 to adder
+(Complementer) B-input: 00101100
+(Complementer) Bits are being flipped...
+(Complementer) Sending 11010011 to incrementer
+(Incrementer) Received 11010011 from complementer
+(Incrementer) Number is being are being incremented...
+(Incrementer) Sending 11010100 to adder
+(Complementer) B-input: 11101101
+(Complementer) Bits are being flipped...
+(Complementer) Sending 00010010 to incrementer
+(Incrementer) Received 00010010 from complementer
+(Incrementer) Number is being are being incremented...
+(Incrementer) Sending 00010011 to adder
+(Complementer) B-input: 11110110
+(Complementer) Bits are being flipped...
+(Complementer) Sending 00001001 to incrementer
+(Incrementer) Received 00001001 from complementer
+(Incrementer) Number is being are being incremented...
+(Incrementer) Sending 00001010 to adder
+(Complementer) B-input: 00001101
+(Complementer) Bits are being flipped...
+(Complementer) Sending 11110010 to incrementer
+(Incrementer) Received 11110010 from complementer
+(Incrementer) Number is being are being incremented...
+(Incrementer) Sending 11110011 to adder
+(Complementer) B-input: 00100000
+(Complementer) Bits are being flipped...
+(Complementer) Sending 11011111 to incrementer
+(Incrementer) Received 11011111 from complementer
+(Incrementer) Number is being are being incremented...
+(Incrementer) Sending 11100000 to adder
+(Complementer) B-input: 11011000
+(Complementer) Bits are being flipped...
+(Complementer) Sending 00100111 to incrementer
+(Incrementer) Received 00100111 from complementer
+(Incrementer) Number is being are being incremented...
+(Incrementer) Sending 00101000 to adder
+(Complementer) B-input: 11101010
+(Complementer) Bits are being flipped...
+(Complementer) Sending 00010101 to incrementer
+(Incrementer) Received 00010101 from complementer
+(Incrementer) Number is being are being incremented...
+(Incrementer) Sending 00010110 to adder
+(Adder) Received 11011100 from incrementer
+(Adder) Completing expression A-B...
+(Adder) Result: 01000000
+(Adder) A-input: 01000010
+(Adder) Received 11010100 from incrementer
+(Adder) Completing expression A-B...
+(Adder) Result: 00010110
+(Adder) A-input: 00101101
+(Adder) Received 00010011 from incrementer
+(Adder) Completing expression A-B...
+(Adder) Result: 01000000
+(Adder) A-input: 00001010
+(Adder) Received 00001010 from incrementer
+(Adder) Completing expression A-B...
+(Adder) Result: 00010100
+(Adder) A-input: 11001110
+(Adder) Received 11110011 from incrementer
+(Adder) Completing expression A-B...
+(Adder) Result: 11000001
+(Adder) A-input: 11100000
+(Adder) Received 11100000 from incrementer
+(Adder) Completing expression A-B...
+(Adder) Result: 11000000
+(Adder) A-input: 11000000
+(Adder) Received 00101000 from incrementer
+(Adder) Completing expression A-B...
+(Adder) Result: 11101000
+(Adder) A-input: 11101110
+(Adder) Received 00010110 from incrementer
+(Adder) Completing expression A-B...
+(Adder) Result: 00000100
+The program has completed the task. Cleaning up...
+exiting adder..
+exiting incrementer..
+exiting complementer..
+Your results are located in results.dat
+Everything closed properly. Goodbye!
+--------------------------------------------------------------------------------
+

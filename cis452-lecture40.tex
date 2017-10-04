@@ -1,0 +1,222 @@
+\documentclass[11pt]{article}
+\usepackage{palatino}
+\usepackage{fullpage}
+\usepackage{listings}
+%\usepackage{minted}
+
+% Shell command markup
+\newcommand{\shellcmd}[1]{\texttt{\footnotesize #1}}
+
+% Rename this file to cis452-lectureNN.tex (use 2-digit consecutive
+% numbers)
+% To produce a PDF output, type the following on EOS
+%
+%  pdflatex -shell-escape cis452-lecture??.tex
+%
+
+\title{CIS452 Lecture-40 Notes}
+\author{Winter 2017}
+\date{}
+\begin{document}
+\maketitle
+
+\noindent
+
+% Be sure to replace your name below
+\textbf{Scribe:} \textit{Tyler Paquet}
+
+\section*{Announcements}
+
+% Use itemize for bullet list
+\begin{itemize}
+  \item Continued to look through handout on Block Allocation
+\end{itemize}
+
+\section*{Chapter 11 (Continued)}
+
+% Use enumerate for numbered list
+
+\begin{enumerate}
+\item Indexed Allocation: Limitations
+	\begin{itemize}
+  	\item The maximum file size if the number of pointers that can fit into one index block
+  	\item To store large files
+		\begin{itemize}
+  		\item Link several index blocks together
+  		\item Multi-level index
+  		\item Combined: use both direct index and multilevel indices (Unix File Systems)
+		\end{itemize}  
+	\end{itemize}
+	
+\item UFS File Format
+	\begin{itemize}
+  	\item UFS (Unix File System) refers a set of FS variants based on Unix design
+  	\item Boot block (usually a single sector): code to bootstrap the OS
+  	\item Super block (several disk sectors): metadata about the filesystem
+  	\item Inode block (several disk sectors) for storing index nodes (inodes)
+  		\begin{itemize}
+  		\item One inode per file/directory
+  		\end{itemize}
+  	\item Many data blocks (greater than 95 percent of the disk sectors)
+  		\begin{itemize}
+  		\item Directory entry and File objects
+  		\item Journals used during recovery
+  		\end{itemize}
+	\end{itemize}
+	
+\item UFS Super Block
+	\begin{itemize}
+	\item Size of the entire filesystem
+	\item Information on free data blocks
+		\begin{itemize}
+		\item Number of free blocks
+		\item A “list” of free blocks
+		\end{itemize}
+	\item Information on free inodes
+		\begin{itemize}
+		\item Number of free inodes
+		\item A “list” of free inodes
+		\item The inode for the root (“/”) directory (inode 128 = root)
+		\end{itemize}
+	\end{itemize}
+	
+\item Linux/Unix File Allocation
+	\begin{itemize}
+  	\item One inode per file / directory
+  	\item File block addresses are stored in inode and also in indirect blocks
+  	\item N (10 or 12) direct pointers and 3 indirect pointers
+  		\begin{itemize}
+  		\item N direct pointers hold the addresses of the first N data blocks used by a file
+  		\item The N+1st pointer holds the address of a single indirect block
+  		\item The N+2nd pointer holds the address of a double indirect block
+  		\item The N+3rd pointer holds the address of a triple indirect block
+  		\end{itemize}
+  	\end{itemize}
+  		
+\item Indirect Blocks
+	\begin{itemize}
+  	\item Indirect blocks are data blocks used for storing pointers to data blocks
+  	\item Single indirect blocks
+  		\begin{itemize}
+  		\item Contain pointers to data blocks
+  		\end{itemize}
+  	\item Double indirect blocks
+  		\begin{itemize}
+  		\item Contain pointers to single indirect blocks
+  		\end{itemize}
+  	\item Triple indirect blocks
+  		\begin{itemize}
+  		\item Contain pointers to double indirect blocks
+  		\end{itemize}
+  	\end{itemize}
+  		
+\item Free (Disk) Block Management
+	\begin{itemize}
+  	\item Bit Vector/Bitmap
+  	\item “Linked-List” (Free List)
+  		\begin{itemize}
+  		\item Simple
+  		\item Grouping
+  		\item Counting
+  		\end{itemize}
+  	\item In the “list” can be implemented as a tree (for faster search)
+  	\end{itemize}
+  	
+\item Bit Vector / Bitmap
+	\begin{itemize}
+  	\item Each block is represented by 1-bit (0 = free, 1= used)
+  	\item Number of bytes for bitmap = ⅛ number of total disk blocks
+  		\begin{itemize}
+  		\item A disk of 64 blocks => 64 bits (8 bytes) needed for bitmap
+  		\end{itemize}
+  	\item Fast to locate free blocks: use bitwise operations
+  	\item Require extra space to maintain free blocks (tooooo much wasted space)
+  		\begin{itemize}
+  		\item A disk with capacity 512G (= 239) and block size of 512 bytes (= 29
+  		\item Number of blocks = 239/29 = 230 blocks
+  		\item Size of bitmaps 230/23 = 227 bytes (128M) of bitmap
+  		\item Percentage of “wasted space” = 227 / 239 = 2-12 = 1/4096 ≈ 2.5%
+  		\end{itemize}
+  	\end{itemize}
+  		
+\item Linked-List of Free Blocks / Free List
+	\begin{itemize}
+  	\item Improvements over Bitmap technique
+  		\begin{itemize}
+  		\item Chain all the free blocks together
+  		\item The superblock keeps the “head” and “tail” of this list
+  		\end{itemize}
+  	\item Place the “next” pointer inside (at the end) of the freeblocks
+  	\item Searching for contiguous free blocks requires reading each block in the chain (too many disk I/O)
+  	\end{itemize}
+  	
+\item Efficiency of Disk Block Operations
+	\begin{itemize}
+  	\item Any bytes in RAM can be accessed within the same amount of time (ns)
+  	\item But, blocks on a disk may have different access time depending on their relative distance to the R/W head current position
+  	\item Updating just one byte on a disk block requires writing the entire block
+  	\item Design objectives of various FS are
+  		\begin{itemize}
+  		\item higher storage capacity (how to support Petabytes or more)
+  		\item fewer disk operations
+  		\item highly consistent data (fewer recovery required)
+  		\end{itemize}
+  	\end{itemize}
+
+\item Critical On-Disk Data Structures
+	\begin{itemize}
+  	\item A filesystem essentially holds (at least) three separate trees:
+  		\begin{itemize}
+  		\item A tree of files and directories (user-owned)
+  		\item A tree of free data blocks (maintained by OS)
+  		\item A tree of free index blocks (maintained by OS)
+  		\end{itemize}
+  	\item These trees originate from the superblock!
+  	\item Any updates to the FS must guarantee the three trees are in sync!
+  	\end{itemize}
+	
+\item Low-Level Filesystem Operations
+	\begin{itemize}
+  	\item To write a file into a (Linux) filesystem
+  		\begin{itemize}
+  		\item Write the file contents into the data blocks
+  		\item Update the inode (file size, timestamps, block pointers, ….)
+  		\item Update the superblock (update the free-block list & free-inode list)
+  		\end{itemize}
+  	\item When the above sequence does not run to completion (i.e. by power failure), the filesystem records only a partial (inconsistent) data/metadata of your file
+  	\end{itemize}
+
+\item When a new file is created
+	\begin{itemize}
+  	\item Its data blocks are allocated ⇒ [superblock update]
+  	\item One inode is allocated ⇒ [superblock update and inode update]
+  	\item The directory entry for the file is update ⇒ [data block update]
+  	\item The inode of the containing directory is updated ⇒ [inode update
+  	\end{itemize}
+  	
+\item Database Transactions & (Intent) Logs
+	\begin{itemize}
+  	\item To guarantee data integrity
+  	\item Multiple operations that update different parts of the DB are performed under one transaction: “BEGIN TRANSACTION” and “COMMIT”/”ROLLBACK”
+  		\begin{itemize}
+  		\item In addition to changing the data, a transaction also logs the intended changes (insert, delete, update)
+  		\item The log must be securely saved PRIOR TO the modification of the actual data
+  		\end{itemize}
+  	\item At recovery time, the contents of the log are compared with the actual data and unfinished transactions can be recovered
+  	\end{itemize}
+
+\item Journaling / Log-Structured FS
+	\begin{itemize}
+  	\item Every modification to the FS must be associated with a log entry
+  		\begin{itemize}
+  		\item Log entry format: timestamp, action, blockid, oldvalue, newValue
+  		\item Log entries are created for ALL types of modification (including inode and superblock)
+  		\end{itemize}
+  	\item The log must be saved FIRST before the actual block updates take place
+  	\item Delete the log after the block updates are successful
+  	\item Recovery after system crash: use the existing log entries to restore FS
+  	\end{itemize}
+
+\end{enumerate}
+
+\end{document}

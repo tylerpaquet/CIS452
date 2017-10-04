@@ -1,0 +1,74 @@
+Script started on Thu 09 Feb 2017 11:03:54 AM EST
+[?1034h[eos26:~/Desktop/CIS452/Lab5]$ exit[2Plsgcc -Wall sampleprogram2.c[7Pvi[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[12P./a.out
+The id of shared memory segment: 259784722
+^C
+[eos26:~/Desktop/CIS452/Lab5]$ ipcs
+
+------ Message Queues --------
+key        msqid      owner      perms      used-bytes   messages    
+
+------ Shared Memory Segments --------
+key        shmid      owner      perms      bytes      nattch     status      
+0x00000000 259719168  ramijavi   600        524288     2          dest         
+0x00000000 256737281  paquett    600        524288     2          dest         
+0x00000000 256770050  paquett    600        4194304    2          dest         
+0x00000000 256868355  paquett    600        393216     2          dest         
+0x00000000 256901124  paquett    600        2097152    2          dest         
+0x000008af 47120389   ortquisr   666        16384      0                       
+0x00000000 256999430  paquett    600        524288     2          dest         
+0x00000000 259588103  paquett    600        4194304    2          dest         
+0x00000000 173178888  ramijavi   600        393216     2          dest         
+0x00000000 259620873  paquett    600        4096       0                       
+0x00000000 173277194  ramijavi   600        524288     2          dest         
+0x00000000 173375499  ramijavi   600        393216     2          dest         
+0x00000000 173408268  ramijavi   600        393216     2          dest         
+0x00000000 173506573  ramijavi   600        393216     2          dest         
+0x00000000 258768910  paquett    600        524288     2          dest         
+0x00000000 173899791  ramijavi   600        393216     2          dest         
+0x00000000 259653648  paquett    600        4096       0                       
+0x00000000 259751953  paquett    600        4096       0                       
+0x00000000 259784722  paquett    600        4096       0                       
+0x000016a1 2392088    ortquisr   666        16384      0                       
+0x00000000 248512540  vansteal   600        4096       0                       
+0x00000000 249430045  vansteal   600        4096       0                       
+
+------ Semaphore Arrays --------
+key        semid      owner      perms      nsems     
+
+[eos26:~/Desktop/CIS452/Lab5]$ ipcrm -m 259784722
+[eos26:~/Desktop/CIS452/Lab5]$ ipcs
+
+------ Message Queues --------
+key        msqid      owner      perms      used-bytes   messages    
+
+------ Shared Memory Segments --------
+key        shmid      owner      perms      bytes      nattch     status      
+0x00000000 259719168  ramijavi   600        524288     2          dest         
+0x00000000 256737281  paquett    600        524288     2          dest         
+0x00000000 256770050  paquett    600        4194304    2          dest         
+0x00000000 256868355  paquett    600        393216     2          dest         
+0x00000000 256901124  paquett    600        2097152    2          dest         
+0x000008af 47120389   ortquisr   666        16384      0                       
+0x00000000 256999430  paquett    600        524288     2          dest         
+0x00000000 259588103  paquett    600        4194304    2          dest         
+0x00000000 173178888  ramijavi   600        393216     2          dest         
+0x00000000 259620873  paquett    600        4096       0                       
+0x00000000 173277194  ramijavi   600        524288     2          dest         
+0x00000000 173375499  ramijavi   600        393216     2          dest         
+0x00000000 173408268  ramijavi   600        393216     2          dest         
+0x00000000 173506573  ramijavi   600        393216     2          dest         
+0x00000000 258768910  paquett    600        524288     2          dest         
+0x00000000 173899791  ramijavi   600        393216     2          dest         
+0x00000000 259653648  paquett    600        4096       0                       
+0x00000000 259751953  paquett    600        4096       0                       
+0x000016a1 2392088    ortquisr   666        16384      0                       
+0x00000000 248512540  vansteal   600        4096       0                       
+0x00000000 249430045  vansteal   600        4096       0                       
+
+------ Semaphore Arrays --------
+key        semid      owner      perms      nsems     
+
+[eos26:~/Desktop/CIS452/Lab5]$ exit
+exit
+
+Script done on Thu 09 Feb 2017 11:04:45 AM EST

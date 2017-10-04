@@ -1,0 +1,22 @@
+[arch05:~/Desktop/CIS452/Lab6]$ ./lab6 10
+10
+values: 0	1
+[arch05:~/Desktop/CIS452/Lab6]$ ./lab6 100
+100
+values: 0	1
+[arch05:~/Desktop/CIS452/Lab6]$ ./lab6 1000
+1000
+values: 0	1
+[arch05:~/Desktop/CIS452/Lab6]$ ./lab6 10000
+10000
+values: 0	1
+[arch05:~/Desktop/CIS452/Lab6]$ ./lab6 100000
+100000
+values: 0	1
+[arch05:~/Desktop/CIS452/Lab6]$ ./lab6 1000000
+1000000
+values: 0	1
+[arch05:~/Desktop/CIS452/Lab6]$ ./lab6 10000000
+10000000
+values: 0	1
+
